@@ -6,7 +6,6 @@
         static void Main()
         {
             ReflectionHelper.SolveProblem();
-            //Day01_ArrayDuplicates.ArrayDuplicates();
         }
 
     }

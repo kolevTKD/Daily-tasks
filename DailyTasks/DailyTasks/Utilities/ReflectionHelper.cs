@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace DailyTasks.Utilities
@@ -7,23 +6,66 @@ namespace DailyTasks.Utilities
 
     public class ReflectionHelper
     {
-        public static string GetProblemInfo()
+        public static void SolveProblem()
         {
-            Console.WriteLine("Select day in format day01 to review problem solution:");
-            string problemInfo = Console.ReadLine();
-            string problemNumber = $"{problemInfo.Remove(0, 3).PadLeft(2, '0')}_";
+            var (problemNumber, foundType) = GetProblemInfo();
 
-            return problemNumber;
+            GetProblem(foundType).Invoke(null, null);
         }
 
-        public static MethodInfo GetProblem(string problemNumber)
+        public static (string ProblemNumber, Type FoundType) GetProblemInfo()
+        {
+            int tasksCount = GetTasksCount();
+
+            Console.WriteLine($"Enter day to access (Day01 through Day{tasksCount:D2}):");
+
+            Type? foundType = null;
+            string problemInfo = String.Empty;
+            string problemNumber = String.Empty;
+
+            while (foundType == null)
+            {
+                problemInfo = Console.ReadLine();
+                problemNumber = $"{problemInfo.Remove(0, 3).PadLeft(2, '0')}_";
+                foundType = GetDayInfo(problemNumber);
+
+                if (foundType == null)
+                {
+                    Console.WriteLine("No task found for this day, please try again.");
+                }
+
+            }
+
+            return (problemNumber, foundType);
+        }
+
+        public static int GetTasksCount()
+        {
+            IEnumerable<Type> allTasksRange = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetCustomAttribute<TaskDescriptionAttribute>() != null);
+
+            return allTasksRange.Count();
+        }
+
+
+        public static Type? GetDayInfo(string problemNumber)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            Type type = assembly.GetTypes().Where(t => t.Namespace == "DailyTasks" && t.Name.Contains(problemNumber)).FirstOrDefault()!; //TODO: Possible null results handle
-            string description = type.GetCustomAttribute<TaskDescriptionAttribute>()!.Description;
-            string inputFormat = type.GetCustomAttribute<TaskDescriptionAttribute>()!.InputFormat;
-            MethodInfo problemSolution = type.GetMethods().FirstOrDefault(m => m.GetCustomAttribute<ProblemSolutionAttribute>() != null)!;
+            Type dayType = assembly.GetTypes().Where(t => t.Namespace == "DailyTasks" && t.Name.Contains(problemNumber)).FirstOrDefault()!;
 
+            return dayType;
+        }
+
+        public static MethodInfo GetProblem(Type type)
+        {
+            var metadata = GetTaskMetadata(type);
+
+            PrintTaskInfo(metadata.Description, metadata.InputFormat);
+
+            return metadata.SolutionMethod;
+        }
+
+        public static void PrintTaskInfo(string description, string inputFormat)
+        {
             StringBuilder sb = new StringBuilder();
 
             Console.WriteLine(
@@ -31,15 +73,14 @@ namespace DailyTasks.Utilities
                    .AppendLine(inputFormat)
                    .ToString()
                    .Trim());
-
-            return problemSolution;
         }
 
-        public static void SolveProblem()
+        public static (string Description, string InputFormat, MethodInfo SolutionMethod) GetTaskMetadata(Type type)
         {
-            string problemInfo = GetProblemInfo();
+            var attribute = type.GetCustomAttribute<TaskDescriptionAttribute>();
+            MethodInfo solutionMethod = type.GetMethods().FirstOrDefault(m => m.GetCustomAttribute<ProblemSolutionAttribute>() != null);
 
-            GetProblem(problemInfo).Invoke(null, null);
+            return (attribute?.Description ?? "", attribute?.InputFormat ?? "", solutionMethod);
         }
     }
 }

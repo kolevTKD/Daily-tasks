@@ -36,19 +36,34 @@ namespace DailyTasks
         [ProblemSolution]
         public static void ArrayDuplicates()
         {
-            int[] input = Console.ReadLine().Split(", ").Select(e => int.Parse(e)).ToArray();
+            string input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("There are no duplicates in the array!");
+
+                return;
+            }
+
+            int[] inputArr = input.Split(", ").Select(e => int.Parse(e)).ToArray();
 
             HashSet<int> seen = new HashSet<int>();
             HashSet<int> result = new HashSet<int>();
 
-            for (int i = 0; i < input.Length; i++)
+            for (int i = 0; i < inputArr.Length; i++)
             {
-                int current = input[i];
+                int current = inputArr[i];
 
                 if (!seen.Add(current))
                 {
                     result.Add(current);
                 }
+            }
+
+            if (result.Count() == 0)
+            {
+                Console.WriteLine("There are no duplicates in the array!");
+
+                return;
             }
 
             Console.WriteLine(String.Join(", ", result));

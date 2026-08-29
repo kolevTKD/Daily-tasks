@@ -13,7 +13,7 @@
             GetProblem(foundType).Invoke(null, null);
         }
 
-        public static (string ProblemNumber, Type FoundType) GetProblemInfo()
+        private static (string ProblemNumber, Type FoundType) GetProblemInfo()
         {
             int tasksCount = GetTasksCount();
 
@@ -28,7 +28,7 @@
             return (isValid.ProblemNumber, isValid.FoundType);
         }
 
-        public static int GetTasksCount()
+        private static int GetTasksCount()
         {
             IEnumerable<Type> allTasksRange = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetCustomAttribute<TaskDescriptionAttribute>() != null);
 
@@ -36,7 +36,7 @@
         }
 
 
-        public static Type? GetDayInfo(string problemNumber)
+        private static Type? GetDayInfo(string problemNumber)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             Type dayType = assembly.GetTypes().Where(t => t.Namespace.Contains("DailyTasks") && t.Name.Contains(problemNumber)).FirstOrDefault()!;
@@ -44,7 +44,7 @@
             return dayType;
         }
 
-        public static (string ProblemNumber, Type? FoundType) CheckValidInput(Type? foundType, string problemInfo, string problemNumber)
+        private static (string ProblemNumber, Type? FoundType) CheckValidInput(Type? foundType, string problemInfo, string problemNumber)
         {
             while (String.IsNullOrWhiteSpace(problemInfo) || foundType == null)
             {
@@ -71,7 +71,7 @@
             return (problemNumber, foundType);
         }
 
-        public static MethodInfo GetProblem(Type type)
+        private static MethodInfo GetProblem(Type type)
         {
             var metadata = GetTaskMetadata(type);
 
@@ -80,13 +80,13 @@
             return metadata.SolutionMethod;
         }
 
-        public static void PrintTaskInfo(string description, string inputFormat)
+        private static void PrintTaskInfo(string description, string inputFormat)
         {
             ConsoleColorHelper.WriteLineColored(description, MessageTypes.Description);
             ConsoleColorHelper.WriteLineColored(inputFormat, MessageTypes.InputFormat);
         }
 
-        public static (string Description, string InputFormat, MethodInfo SolutionMethod) GetTaskMetadata(Type type)
+        private static (string Description, string InputFormat, MethodInfo SolutionMethod) GetTaskMetadata(Type type)
         {
             var attribute = type.GetCustomAttribute<TaskDescriptionAttribute>();
             MethodInfo solutionMethod = type.GetMethods().FirstOrDefault(m => m.GetCustomAttribute<ProblemSolutionAttribute>() != null);

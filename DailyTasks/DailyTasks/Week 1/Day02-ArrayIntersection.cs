@@ -11,10 +11,7 @@
     {
         public static void ArrayIntersectionV2()
         {
-            ConsoleColorHelper.WriteColored("Input Array 1: ", MessageTypes.Prompt);
             string input1 = Console.ReadLine();
-
-            ConsoleColorHelper.WriteColored("Input Array 2: ", MessageTypes.Prompt);
             string input2 = Console.ReadLine();
 
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
@@ -44,17 +41,14 @@
         [ProblemSolution]
         public static void ArrayIntersection()
         {
-            string input1 = Console.ReadLine();
-            string input2 = Console.ReadLine();
+            string input1 = string.Empty;
+            string input2 = string.Empty;
+            bool isAllValid = false;
 
-            if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
-            {
-                ConsoleColorHelper.WriteLineColored("No numbers intersect in the arrays!", MessageTypes.Result);
-                return;
-            }
+            int[] inputArr1 = ValidateInput(input1, isAllValid, "Input Array 1").ToArray();
 
-            int[] inputArr1 = input1.Split(", ").Select(n => int.Parse(n)).ToArray();
-            int[] inputArr2 = input2.Split(", ").Select(n => int.Parse(n)).ToArray();
+            int[] inputArr2 = ValidateInput(input1, isAllValid, "Input Array 2").ToArray();
+
 
             HashSet<int> seen = inputArr1.ToHashSet();
             HashSet<int> result = new HashSet<int>();
@@ -75,7 +69,47 @@
                 return;
             }
 
-            ConsoleColorHelper.WriteLineColored(String.Join(", ", result.OrderBy(n => n)), MessageTypes.Result);
+            ConsoleColorHelper.WriteLineColored($"Intersected numbers: {String.Join(", ", result.OrderBy(n => n))}", MessageTypes.Result);
+        }
+
+        private static List<int> ValidateInput(string input, bool isAllValid, string label)
+        {
+            List<int> numbers = new List<int>();
+
+            while (isAllValid == false)
+            {
+                ConsoleColorHelper.WriteColored($"{label}: ", MessageTypes.Prompt);
+                input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    ConsoleColorHelper.WriteLineColored("Invalid input, please try again.", MessageTypes.Error);
+                    continue;
+                }
+
+                string[] rawParts = input.Split(new[] { ',', '.' }).Select(p => p.Trim()).ToArray();
+
+                numbers = new List<int>();
+                isAllValid = true;
+
+                foreach (string part in rawParts)
+                {
+                    if (!int.TryParse(part, out int number))
+                    {
+                        isAllValid = false;
+                        break;
+                    }
+                    numbers.Add(number);
+                }
+
+                if (!isAllValid)
+                {
+                    ConsoleColorHelper.WriteLineColored("Invalid input, please try again.", MessageTypes.Error);
+                    continue;
+                }
+            }
+
+            return numbers;
         }
     }
 }

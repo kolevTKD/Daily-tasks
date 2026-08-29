@@ -37,16 +37,13 @@
         [ProblemSolution]
         public static void ArrayDuplicates()
         {
-            ConsoleColorHelper.WriteColored("Input Array: ", MessageTypes.Prompt);
-            string input = Console.ReadLine();
+            string input = string.Empty;
+            bool isAllValid = false;
+            List<int> numbers = new List<int>();
 
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                ConsoleColorHelper.WriteLineColored("There are no duplicates in the array!", MessageTypes.Result);
-                return;
-            }
+            ValidateInput(input, isAllValid, numbers);
 
-            int[] inputArr = input.Split(", ").Select(e => int.Parse(e)).ToArray();
+            int[] inputArr = numbers!.ToArray();
 
             HashSet<int> seen = new HashSet<int>();
             HashSet<int> result = new HashSet<int>();
@@ -67,7 +64,45 @@
                 return;
             }
 
-            ConsoleColorHelper.WriteLineColored(String.Join(", ", result), MessageTypes.Result);
+            ConsoleColorHelper.WriteLineColored($"Duplicate numbers: {String.Join(", ", result.OrderBy(n => n))}", MessageTypes.Result);
+        }
+
+        private static List<int> ValidateInput(string input, bool isAllValid, List<int> numbers)
+        {
+            while (isAllValid == false)
+            {
+                ConsoleColorHelper.WriteColored("Input Array: ", MessageTypes.Prompt);
+                input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    ConsoleColorHelper.WriteLineColored("Invalid input, please try again.", MessageTypes.Error);
+                    continue;
+                }
+
+                string[] rawParts = input.Split(new[] { ',', '.' }).Select(p => p.Trim()).ToArray();
+
+                numbers = new List<int>();
+                isAllValid = true;
+
+                foreach (string part in rawParts)
+                {
+                    if (!int.TryParse(part, out int number))
+                    {
+                        isAllValid = false;
+                        break;
+                    }
+                    numbers.Add(number);
+                }
+
+                if (!isAllValid)
+                {
+                    ConsoleColorHelper.WriteLineColored("Invalid input, please try again.", MessageTypes.Error);
+                    continue;
+                }
+            }
+
+            return numbers;
         }
     }
 }

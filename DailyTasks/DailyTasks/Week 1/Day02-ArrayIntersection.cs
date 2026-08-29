@@ -17,7 +17,6 @@
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
             {
                 ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
-                //Console.WriteLine("No numbers intersect in the arrays!");
                 return;
             }
 
@@ -37,8 +36,6 @@
             }
 
             ConsoleColorHelper.WriteColored(String.Join(", ", result.OrderBy(n => n)), MessageType.Result);
-            //Console.WriteLine(String.Join(", ", result.OrderBy(n => n)));
-
         }
 
         [ProblemSolution]
@@ -50,7 +47,6 @@
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
             {
                 ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
-                //Console.WriteLine("No numbers intersect in the arrays!");
                 return;
             }
 
@@ -73,13 +69,10 @@
             if (result.Count == 0)
             {
                 ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
-                //Console.WriteLine("No numbers intersect in the arrays!");
                 return;
             }
 
             ConsoleColorHelper.WriteColored(String.Join(", ", result.OrderBy(n => n)), MessageType.Result);
-
-            //Console.WriteLine(String.Join(", ", result.OrderBy(n => n)));
         }
     }
 }

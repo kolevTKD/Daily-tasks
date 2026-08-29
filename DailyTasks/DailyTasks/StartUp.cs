@@ -8,6 +8,5 @@
         {
             ReflectionHelper.SolveProblem();
         }
-
     }
 }

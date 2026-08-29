@@ -7,8 +7,8 @@
             Console.ForegroundColor = messageType switch
             {
                 MessageType.Prompt => ConsoleColor.Cyan,
-                MessageType.Description => ConsoleColor.DarkGreen,
-                MessageType.InputFormat => ConsoleColor.DarkGreen,
+                MessageType.Description => ConsoleColor.Blue,
+                MessageType.InputFormat => ConsoleColor.Blue,
                 MessageType.Result => ConsoleColor.Green,
                 MessageType.Error => ConsoleColor.DarkYellow,
                 _ => ConsoleColor.White

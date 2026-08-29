@@ -1,6 +1,6 @@
 ﻿namespace DailyTasks
 {
-    using DailyTasks.Utilities;
+    using Utilities;
     using Utilities.Attributes;
 
     [TaskDescription(@"Find all numbers that appear more than once in an array of integers. Each duplicate should be printed only once, regardless of how many times it repeats.",
@@ -41,8 +41,6 @@
             if (string.IsNullOrWhiteSpace(input))
             {
                 ConsoleColorHelper.WriteColored("There are no duplicates in the array!", MessageType.Result);
-                //Console.WriteLine("There are no duplicates in the array!");
-
                 return;
             }
 
@@ -64,8 +62,6 @@
             if (result.Count() == 0)
             {
                 ConsoleColorHelper.WriteColored("There are no duplicates in the array!", MessageType.Result);
-                //Console.WriteLine("There are no duplicates in the array!");
-
                 return;
             }
 

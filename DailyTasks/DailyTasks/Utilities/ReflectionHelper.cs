@@ -1,7 +1,6 @@
 ﻿namespace DailyTasks.Utilities
 {
     using System.Reflection;
-    using System.Text;
 
     using Attributes;
 
@@ -19,8 +18,6 @@
             int tasksCount = GetTasksCount();
 
             ConsoleColorHelper.WriteColored($"Enter day to access (Day01 through Day{tasksCount:D2}):", MessageType.Prompt);
-
-            //Console.WriteLine($"Enter day to access (Day01 through Day{tasksCount:D2}):");
 
             Type? foundType = null;
             string problemInfo = String.Empty;
@@ -51,15 +48,17 @@
         {
             while (String.IsNullOrWhiteSpace(problemInfo) || foundType == null)
             {
-                problemInfo = Console.ReadLine();
+                problemInfo = Console.ReadLine().Trim();
 
-                if (String.IsNullOrWhiteSpace(problemInfo))
+                if (String.IsNullOrWhiteSpace(problemInfo) && problemInfo.ToLower().Take(3) != "day")
                 {
                     ConsoleColorHelper.WriteColored("Invalid input, please try again.", MessageType.Error);
                     continue;
                 }
 
-                problemNumber = $"{problemInfo.Remove(0, 3).PadLeft(2, '0')}_";
+                string digitsOnly = new string(problemInfo.Where(d => char.IsDigit(d)).ToArray());
+                problemNumber = $"{digitsOnly.PadLeft(2, '0')}_";
+
                 foundType = GetDayInfo(problemNumber);
 
                 if (foundType == null)

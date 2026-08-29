@@ -1,6 +1,7 @@
 ﻿namespace DailyTasks
 {
-    using DailyTasks.Utilities;
+    using Utilities;
+
     public class StartUp
     {
         static void Main()

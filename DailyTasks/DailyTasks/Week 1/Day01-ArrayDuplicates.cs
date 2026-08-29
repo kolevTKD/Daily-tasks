@@ -1,8 +1,9 @@
-﻿using DailyTasks.Utilities;
-
-namespace DailyTasks
+﻿namespace DailyTasks
 {
-    [TaskDescription(@"Find all numbers that appear more than once in an array of integers. Each duplicate should be printed only once, regardless of how many times it repeats.", 
+    using DailyTasks.Utilities;
+    using Utilities.Attributes;
+
+    [TaskDescription(@"Find all numbers that appear more than once in an array of integers. Each duplicate should be printed only once, regardless of how many times it repeats.",
                       "A single line of integers separated by \", \" (e.g. 4, 3, 2, 7, 8, 2, 3, 1)")]
     public class Day01_ArrayDuplicates
     {
@@ -39,7 +40,8 @@ namespace DailyTasks
             string input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input))
             {
-                Console.WriteLine("There are no duplicates in the array!");
+                ConsoleColorHelper.WriteColored("There are no duplicates in the array!", MessageType.Result);
+                //Console.WriteLine("There are no duplicates in the array!");
 
                 return;
             }
@@ -61,12 +63,13 @@ namespace DailyTasks
 
             if (result.Count() == 0)
             {
-                Console.WriteLine("There are no duplicates in the array!");
+                ConsoleColorHelper.WriteColored("There are no duplicates in the array!", MessageType.Result);
+                //Console.WriteLine("There are no duplicates in the array!");
 
                 return;
             }
 
-            Console.WriteLine(String.Join(", ", result));
+            ConsoleColorHelper.WriteColored(String.Join(", ", result), MessageType.Result);
         }
     }
 }

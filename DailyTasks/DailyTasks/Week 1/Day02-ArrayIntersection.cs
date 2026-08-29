@@ -1,8 +1,10 @@
-﻿using DailyTasks.Utilities;
-using System.Collections.Immutable;
-
-namespace DailyTasks
+﻿namespace DailyTasks
 {
+    using System.Collections.Immutable;
+
+    using Utilities;
+    using Utilities.Attributes;
+
     [TaskDescription(@"Find all numbers that appear in both of two given arrays of integers. Each common number should be printed only once, even if it repeats in one or both arrays.",
                       "Two lines, each a list of integers separated by \", \" (e.g. 4, 3, 2, 7, 8 / 2, 8, 3, 9, 1)")]
     public class Day02_ArrayIntersection
@@ -14,7 +16,8 @@ namespace DailyTasks
 
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
             {
-                Console.WriteLine("No numbers intersect in the arrays!");
+                ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
+                //Console.WriteLine("No numbers intersect in the arrays!");
                 return;
             }
 
@@ -33,7 +36,8 @@ namespace DailyTasks
                 }
             }
 
-            Console.WriteLine(String.Join(", ", result.OrderBy(n => n)));
+            ConsoleColorHelper.WriteColored(String.Join(", ", result.OrderBy(n => n)), MessageType.Result);
+            //Console.WriteLine(String.Join(", ", result.OrderBy(n => n)));
 
         }
 
@@ -45,7 +49,8 @@ namespace DailyTasks
 
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
             {
-                Console.WriteLine("No numbers intersect in the arrays!");
+                ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
+                //Console.WriteLine("No numbers intersect in the arrays!");
                 return;
             }
 
@@ -67,11 +72,14 @@ namespace DailyTasks
 
             if (result.Count == 0)
             {
-                Console.WriteLine("No numbers intersect in the arrays!");
+                ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
+                //Console.WriteLine("No numbers intersect in the arrays!");
                 return;
             }
 
-            Console.WriteLine(String.Join(", ", result.OrderBy(n => n)));
+            ConsoleColorHelper.WriteColored(String.Join(", ", result.OrderBy(n => n)), MessageType.Result);
+
+            //Console.WriteLine(String.Join(", ", result.OrderBy(n => n)));
         }
     }
 }

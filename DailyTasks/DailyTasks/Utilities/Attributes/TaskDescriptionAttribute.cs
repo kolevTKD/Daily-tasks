@@ -1,4 +1,4 @@
-﻿namespace DailyTasks.Utilities
+﻿namespace DailyTasks.Utilities.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class TaskDescriptionAttribute : Attribute

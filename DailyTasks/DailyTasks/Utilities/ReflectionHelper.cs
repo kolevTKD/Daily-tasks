@@ -17,7 +17,7 @@
         {
             int tasksCount = GetTasksCount();
 
-            ConsoleColorHelper.WriteColored($"Enter day to access (Day01 through Day{tasksCount:D2}):", MessageType.Prompt);
+            ConsoleColorHelper.WriteLineColored($"Enter day to access (Day01 through Day{tasksCount:D2}):", MessageTypes.Prompt);
 
             Type? foundType = null;
             string problemInfo = String.Empty;
@@ -39,7 +39,7 @@
         public static Type? GetDayInfo(string problemNumber)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            Type dayType = assembly.GetTypes().Where(t => t.Namespace == "DailyTasks" && t.Name.Contains(problemNumber)).FirstOrDefault()!;
+            Type dayType = assembly.GetTypes().Where(t => t.Namespace.Contains("DailyTasks") && t.Name.Contains(problemNumber)).FirstOrDefault()!;
 
             return dayType;
         }
@@ -50,9 +50,9 @@
             {
                 problemInfo = Console.ReadLine().Trim();
 
-                if (String.IsNullOrWhiteSpace(problemInfo) && problemInfo.ToLower().Take(3) != "day")
+                if (String.IsNullOrWhiteSpace(problemInfo) || !problemInfo.ToLower().StartsWith("day"))
                 {
-                    ConsoleColorHelper.WriteColored("Invalid input, please try again.", MessageType.Error);
+                    ConsoleColorHelper.WriteLineColored("Invalid input, please try again.", MessageTypes.Error);
                     continue;
                 }
 
@@ -63,7 +63,7 @@
 
                 if (foundType == null)
                 {
-                    ConsoleColorHelper.WriteColored("No task found for this day, please try again.", MessageType.Error);
+                    ConsoleColorHelper.WriteLineColored("No task found for this day, please try again.", MessageTypes.Error);
                     continue;
                 }
             }
@@ -82,8 +82,8 @@
 
         public static void PrintTaskInfo(string description, string inputFormat)
         {
-            ConsoleColorHelper.WriteColored(description, MessageType.Description);
-            ConsoleColorHelper.WriteColored(inputFormat, MessageType.InputFormat);
+            ConsoleColorHelper.WriteLineColored(description, MessageTypes.Description);
+            ConsoleColorHelper.WriteLineColored(inputFormat, MessageTypes.InputFormat);
         }
 
         public static (string Description, string InputFormat, MethodInfo SolutionMethod) GetTaskMetadata(Type type)

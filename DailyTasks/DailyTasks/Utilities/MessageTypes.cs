@@ -1,6 +1,6 @@
 ﻿namespace DailyTasks.Utilities
 {
-    public enum MessageType
+    public enum MessageTypes
     {
         Prompt,
         Description,

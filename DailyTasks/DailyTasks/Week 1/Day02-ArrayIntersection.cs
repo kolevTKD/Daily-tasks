@@ -16,7 +16,7 @@
 
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
             {
-                ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
+                ConsoleColorHelper.WriteLineColored("No numbers intersect in the arrays!", MessageTypes.Result);
                 return;
             }
 
@@ -35,7 +35,7 @@
                 }
             }
 
-            ConsoleColorHelper.WriteColored(String.Join(", ", result.OrderBy(n => n)), MessageType.Result);
+            ConsoleColorHelper.WriteLineColored(String.Join(", ", result.OrderBy(n => n)), MessageTypes.Result);
         }
 
         [ProblemSolution]
@@ -46,7 +46,7 @@
 
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))
             {
-                ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
+                ConsoleColorHelper.WriteLineColored("No numbers intersect in the arrays!", MessageTypes.Result);
                 return;
             }
 
@@ -68,11 +68,11 @@
 
             if (result.Count == 0)
             {
-                ConsoleColorHelper.WriteColored("No numbers intersect in the arrays!", MessageType.Result);
+                ConsoleColorHelper.WriteLineColored("No numbers intersect in the arrays!", MessageTypes.Result);
                 return;
             }
 
-            ConsoleColorHelper.WriteColored(String.Join(", ", result.OrderBy(n => n)), MessageType.Result);
+            ConsoleColorHelper.WriteLineColored(String.Join(", ", result.OrderBy(n => n)), MessageTypes.Result);
         }
     }
 }

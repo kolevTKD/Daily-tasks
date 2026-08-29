@@ -2,15 +2,15 @@
 {
     public class ConsoleColorHelper
     {
-        public static void WriteColored(string text, MessageType messageType)
+        public static void WriteLineColored(string text, MessageTypes messageType)
         {
             Console.ForegroundColor = messageType switch
             {
-                MessageType.Prompt => ConsoleColor.Cyan,
-                MessageType.Description => ConsoleColor.Blue,
-                MessageType.InputFormat => ConsoleColor.Blue,
-                MessageType.Result => ConsoleColor.Green,
-                MessageType.Error => ConsoleColor.DarkYellow,
+                MessageTypes.Prompt => ConsoleColor.Cyan,
+                MessageTypes.Description => ConsoleColor.Blue,
+                MessageTypes.InputFormat => ConsoleColor.Blue,
+                MessageTypes.Result => ConsoleColor.Green,
+                MessageTypes.Error => ConsoleColor.DarkYellow,
                 _ => ConsoleColor.White
             };
 

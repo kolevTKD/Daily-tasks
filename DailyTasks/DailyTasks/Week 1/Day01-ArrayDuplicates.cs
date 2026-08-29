@@ -40,7 +40,7 @@
             string input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input))
             {
-                ConsoleColorHelper.WriteColored("There are no duplicates in the array!", MessageType.Result);
+                ConsoleColorHelper.WriteLineColored("There are no duplicates in the array!", MessageTypes.Result);
                 return;
             }
 
@@ -61,11 +61,11 @@
 
             if (result.Count() == 0)
             {
-                ConsoleColorHelper.WriteColored("There are no duplicates in the array!", MessageType.Result);
+                ConsoleColorHelper.WriteLineColored("There are no duplicates in the array!", MessageTypes.Result);
                 return;
             }
 
-            ConsoleColorHelper.WriteColored(String.Join(", ", result), MessageType.Result);
+            ConsoleColorHelper.WriteLineColored(String.Join(", ", result), MessageTypes.Result);
         }
     }
 }

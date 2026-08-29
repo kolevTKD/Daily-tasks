@@ -11,7 +11,10 @@
     {
         public static void ArrayIntersectionV2()
         {
+            ConsoleColorHelper.WriteColored("Input Array 1: ", MessageTypes.Prompt);
             string input1 = Console.ReadLine();
+
+            ConsoleColorHelper.WriteColored("Input Array 2: ", MessageTypes.Prompt);
             string input2 = Console.ReadLine();
 
             if (String.IsNullOrWhiteSpace(input1) || String.IsNullOrWhiteSpace(input2))

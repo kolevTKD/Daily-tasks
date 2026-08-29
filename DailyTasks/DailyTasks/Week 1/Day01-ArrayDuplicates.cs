@@ -37,7 +37,9 @@
         [ProblemSolution]
         public static void ArrayDuplicates()
         {
+            ConsoleColorHelper.WriteColored("Input Array: ", MessageTypes.Prompt);
             string input = Console.ReadLine();
+
             if (string.IsNullOrWhiteSpace(input))
             {
                 ConsoleColorHelper.WriteLineColored("There are no duplicates in the array!", MessageTypes.Result);

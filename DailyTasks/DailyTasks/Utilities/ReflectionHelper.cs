@@ -82,8 +82,12 @@
 
         private static void PrintTaskInfo(string description, string inputFormat)
         {
+            ConsoleColorHelper.WriteLineColored("Task description:", MessageTypes.Description);
             ConsoleColorHelper.WriteLineColored(description, MessageTypes.Description);
+            Console.WriteLine();
+            ConsoleColorHelper.WriteLineColored("Input format:", MessageTypes.InputFormat);
             ConsoleColorHelper.WriteLineColored(inputFormat, MessageTypes.InputFormat);
+            Console.WriteLine();
         }
 
         private static (string Description, string InputFormat, MethodInfo SolutionMethod) GetTaskMetadata(Type type)

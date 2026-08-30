@@ -82,10 +82,10 @@
 
         private static void PrintTaskInfo(string description, string inputFormat)
         {
-            ConsoleColorHelper.WriteLineColored("Task description:", MessageTypes.Description);
+            ConsoleColorHelper.WriteLineColored("Task description:", MessageTypes.TaskLabel);
             ConsoleColorHelper.WriteLineColored(description, MessageTypes.Description);
             Console.WriteLine();
-            ConsoleColorHelper.WriteLineColored("Input format:", MessageTypes.InputFormat);
+            ConsoleColorHelper.WriteLineColored("Input format:", MessageTypes.TaskLabel);
             ConsoleColorHelper.WriteLineColored(inputFormat, MessageTypes.InputFormat);
             Console.WriteLine();
         }

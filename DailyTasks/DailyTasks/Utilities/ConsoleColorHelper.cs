@@ -23,10 +23,11 @@
             return Console.ForegroundColor = messageTypes switch
             {
                 MessageTypes.Prompt => ConsoleColor.Cyan,
-                MessageTypes.Description => ConsoleColor.Blue,
-                MessageTypes.InputFormat => ConsoleColor.Blue,
+                MessageTypes.Description => ConsoleColor.DarkBlue,
+                MessageTypes.InputFormat => ConsoleColor.DarkBlue,
                 MessageTypes.Result => ConsoleColor.Green,
                 MessageTypes.Error => ConsoleColor.DarkYellow,
+                MessageTypes.TaskLabel => ConsoleColor.DarkCyan,
                 _ => ConsoleColor.White
             };
         }

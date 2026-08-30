@@ -7,5 +7,6 @@
         InputFormat,
         Result,
         Error,
+        TaskLabel,
     }
 }

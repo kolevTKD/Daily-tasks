@@ -41,9 +41,7 @@
             bool isAllValid = false;
             List<int> numbers = new List<int>();
 
-            ValidateInput(input, isAllValid, numbers);
-
-            int[] inputArr = numbers!.ToArray();
+            int[] inputArr = ValidateInput(input, isAllValid, numbers).ToArray();
 
             HashSet<int> seen = new HashSet<int>();
             HashSet<int> result = new HashSet<int>();

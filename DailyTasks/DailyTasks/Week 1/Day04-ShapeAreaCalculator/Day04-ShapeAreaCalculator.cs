@@ -76,12 +76,16 @@
         {
             ConstructorInfo constructor = shapeType.GetConstructors().First();
             ParameterInfo[] parameters = constructor.GetParameters();
+            PropertyInfo[] properties = shapeType.GetProperties();
 
             object[] args = new object[parameters.Length];
 
             for (int i = 0; i < parameters.Length; i++)
             {
-                ConsoleColorHelper.WriteColored($"{parameters[i].Name}: ", MessageTypes.Prompt);
+                PropertyInfo matchedProperty = properties.FirstOrDefault(p => p.Name.Equals(parameters[i].Name, StringComparison.OrdinalIgnoreCase));
+                string displayName = matchedProperty?.Name;
+
+                ConsoleColorHelper.WriteColored($"{displayName}: ", MessageTypes.Prompt);
 
                 bool isValid = double.TryParse(Console.ReadLine().Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture, out double number);
 

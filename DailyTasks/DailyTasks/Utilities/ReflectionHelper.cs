@@ -39,7 +39,7 @@
         private static Type? GetDayInfo(string problemNumber)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            Type dayType = assembly.GetTypes().Where(t => t.Namespace.Contains("DailyTasks") && t.Name.Contains(problemNumber)).FirstOrDefault()!;
+            Type dayType = assembly.GetTypes().Where(t => t.Namespace != null && t.Namespace.Contains("DailyTasks") && t.Name.Contains(problemNumber)).FirstOrDefault()!;
 
             return dayType;
         }

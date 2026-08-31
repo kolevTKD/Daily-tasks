@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace DailyTasks.Week_1.Day05_StudentsManager
+﻿namespace DailyTasks.Week_1.Day05_StudentsManager
 {
     public class Student
     {
@@ -16,7 +14,6 @@ namespace DailyTasks.Week_1.Day05_StudentsManager
         }
 
         public override string ToString()
-            => $"Student: {Name}\nAge: {Age}\nGrade: {Grade:F2}";
-        
+            => $"Student: {Name}{Environment.NewLine}Age: {Age}{Environment.NewLine}Grade: {Grade:F2}";
     }
 }
